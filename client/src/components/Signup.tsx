@@ -30,7 +30,7 @@ function Signup(this: any) {
                 <br/>
                 <div className="input-container">
                     <input placeholder="Username " className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" name="uname" required />
+                        type="text" name="username" required />
                 </div>
                 <br/>
                 <div className="input-container">
@@ -40,12 +40,12 @@ function Signup(this: any) {
                 <br/>
                 <div className="input-container">
                     <input placeholder="Password" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="password" name="pass1" id='pw1' onChange={setP1} required />
+                        type="password" name="password" id='pw1' onChange={setP1} required />
                 </div>
                 <br/>
                 <div className="input-container">
                     <input placeholder="Confirm Password" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="password" name="pass2" id='pw2' onChange={setP2} required />
+                        type="password" name="password2" id='pw2' onChange={setP2} required />
                 </div>
                 <br/>
                 <div className="w-half">

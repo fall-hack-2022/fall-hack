@@ -4,7 +4,7 @@ function NewLot() {
         <div className="text-center">
             <br/>
             <h1 className="mb-8 text-3xl text-center">New Lot</h1>
-            <form action='/users/createLot' method='post'>
+            <form action='/lots/createLot' method='post'>
                 <div className="input-container">
                     <input placeholder="Lot Name" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text" name="lotName" required />

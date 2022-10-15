@@ -28,7 +28,7 @@ router.post("/createLot", async (req, res) => {
       var insertQuery = `INSERT INTO ${process.env.PG_LOT_TABLE} (owner, lot_name, price, address, spots_total) values (${req.session.user.id}, '${lotName}', ${price}, '${address}', ${spots})`;
       const result = await client.query(insertQuery);
       client.release();
-      res.json({ message: "YOUR LOT HAS BEEN CREATED. CONGRATULATIONS" });
+      res.redirect('/lots');
     } catch (err) {
       console.error(err);
       res.json({ message: "YOUR LOT FAILED TO BE CREATED! NOW YOU DIE" });

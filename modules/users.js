@@ -7,6 +7,7 @@ const crypto = require('crypto')
 const session = require('express-session');
 const cors = require('cors');
 router.use(express.json(), cors())
+router.use(express.urlencoded())
 router.use(methodOverride('_method'))
 router.options('*', cors())
 router.use((req, res, next) => {
@@ -32,8 +33,8 @@ router.post('/createUser', async (req,res)=> {
             const insert = await client.query(insertQuery);
             const result2 = await client.query(userPasswordQuery);
             var results2 = { 'results': (result2) ? result2.rows : null };
-            console.log(req.session)
-            console.log(results2)
+            // console.log(req.session)
+            // console.log(results2)
             req.session.user = results2.results[0];
             client.release()
             res.redirect('/newlot')
