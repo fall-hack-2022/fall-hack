@@ -8,12 +8,6 @@ const app = express();
 const userRouter = require('./modules/users')
 const lotRouter = require('./modules/lot')
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, '/public')))
-app.use('/users', userRouter)
-app.use('/lots', lotRouter)
 app.use(session({
 
     name: "session",
@@ -23,6 +17,13 @@ app.use(session({
     saveUninitialized: false //false prevent new cookie every http requesr
 
 }));
+app.use(cors())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, '/public')))
+app.use('/users', userRouter)
+app.use('/lots', lotRouter)
+
 
 app.get('/hello', (req, res) => {
     res.send("HELLO!");
