@@ -26,5 +26,36 @@ app.get('/*', (req, res) => {
 })
 
 app.listen(PORT, () => {
+    const createQuery1 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_DB_TABLE} (
+        id SERIAL,
+        user_name TEXT NOT NULL, 
+        pass TEXT NOT NULL, 
+        email TEXT NOT NULL, 
+        fname TEXT NOT NULL, 
+        lname TEXT NOT NULL,
+        admin BOOLEAN NOT NULL DEFAULT false, 
+        verified BOOLEAN NOT NULL DEFAULT false);`
+
+    const createQuery2 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_DB_TABLE} (
+        id SERIAL,
+        lot_name TEXT NOT NULL, 
+        price INT NOT NULL, 
+        address TEXT NOT NULL, 
+        spots_total INT NOT NULL,
+        spots_filled INT NOT NULL DEFAULT 0,
+        maintenance BOOLEAN NOT FULL DEFAULT false,
+        closed BOOLEAN NOT FULL DEFAULT false);`
+
+    pool.query(createQuery1, (err, result) => {
+        if(err){
+            console.log(err)
+        }
+    })
+    pool.query(createQuery2, (err, result) => {
+        if(err){            
+            console.log(err)
+        }
+    })
+
     console.log(`App is listening on port: ${PORT}`)
 })
