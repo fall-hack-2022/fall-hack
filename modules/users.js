@@ -4,8 +4,10 @@ const pool = require('../db');
 const methodOverride = require('method-override');
 router.use(methodOverride('_method'))
 
-
-router.get('/', (req,res)=> {
+router.post('/createUser', (req,res)=> {
+    
+    
+    
     res.send('users')
 })
 
