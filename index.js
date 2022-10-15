@@ -5,11 +5,15 @@ const session = require('express-session');
 const pool = require('./db');
 const cors = require('cors');
 const app = express();
+const userRouter = require('./modules/users')
+const lotRouter = require('./modules/lot')
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/public')))
+app.use('/users', userRouter)
+app.use('/lots', lotRouter)
 
 
 app.get('/hello', (req, res) => {
@@ -26,7 +30,7 @@ app.get('/*', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    const createQuery1 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_DB_TABLE} (
+    const createQuery1 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_USER_TABLE} (
         id SERIAL,
         user_name TEXT NOT NULL, 
         pass TEXT NOT NULL, 
@@ -36,15 +40,15 @@ app.listen(PORT, () => {
         admin BOOLEAN NOT NULL DEFAULT false, 
         verified BOOLEAN NOT NULL DEFAULT false);`
 
-    const createQuery2 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_DB_TABLE} (
+    const createQuery2 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_LOT_TABLE} (
         id SERIAL,
         lot_name TEXT NOT NULL, 
         price INT NOT NULL, 
         address TEXT NOT NULL, 
         spots_total INT NOT NULL,
         spots_filled INT NOT NULL DEFAULT 0,
-        maintenance BOOLEAN NOT FULL DEFAULT false,
-        closed BOOLEAN NOT FULL DEFAULT false);`
+        maintenance BOOLEAN NOT NULL DEFAULT false,
+        closed BOOLEAN NOT NULL DEFAULT false);`
 
     pool.query(createQuery1, (err, result) => {
         if(err){
