@@ -1,10 +1,17 @@
 import {useState} from "react";
 
 function Signup(this: any) {
-    const [input, setInput] = useState({
-        password1: '',
-        password2: ''
-    })
+
+    const [password1, setPassword1] = useState("")
+    const [password2, setPassword2] = useState("")
+
+    const setP1 = (e: any) => {
+        setPassword1(e.target.value)
+    }
+
+    const setP2 = (e: any) => {
+        setPassword2(e.target.value)
+    }
 
     return (
         <div>
@@ -27,14 +34,14 @@ function Signup(this: any) {
                 </div>
                 <div className="input-container">
                     <label>Password </label>
-                    <input type="password" name="pass1" id='pw1' required />
+                    <input type="password" name="pass1" id='pw1' onChange={setP1} required />
                 </div>
                 <div className="input-container">
                     <label>Confirm Password </label>
-                    <input type="password" name="pass2" id='pw2' required />
+                    <input type="password" name="pass2" id='pw2' onChange={setP2} required />
                 </div>
                 <div className="button-container">
-                    {document.getElementById('pw1').value == document.getElementById('pw1')!.value ? <button type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
+                    {password1 == password2 ? <button type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
                 </div>
             </form>
         </div>
