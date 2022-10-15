@@ -1,8 +1,6 @@
-import {Link} from 'react-router-dom' 
-
 function Homepage() {
   return (
-    <div >
+    <div className="text-center">
       HOMEPAGE TEXT
     </div>
   );

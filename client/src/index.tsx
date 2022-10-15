@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Homepage from './components/Homepage';
-import Lot from './components/Lot';
+import Lots from './components/Lots';
 import Login from './components/Login'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Signup from "./components/Signup";
@@ -13,17 +13,21 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
+    <div className="h-screen flex flex-col">
     <BrowserRouter>
     <Header />
-    <br />
+    <div className='flex-col'>
+      <div className='m-auto bg-slate-300 flex-grow'>
     <Routes>
-      <Route path='/lot' element={<Lot />} />
+      <Route path='/lots' element={<Lots />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup/>}  />
       <Route path='/*' element={<Homepage />} />
     </Routes>
+    </div>
+    </div>
     </BrowserRouter>
-
+    </div>
   </React.StrictMode>
 );
 

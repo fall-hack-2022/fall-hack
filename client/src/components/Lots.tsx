@@ -1,5 +1,5 @@
 
-function Lot() {
+function Lots() {
   return (
     <div>
         <div>ASJDFK:SDAJGK:LADWSJGLK:</div>
@@ -7,4 +7,4 @@ function Lot() {
   )
 }
 
-export default Lot
+export default Lots
