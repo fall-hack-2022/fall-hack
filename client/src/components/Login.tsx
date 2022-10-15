@@ -3,7 +3,7 @@ function Login() {
 
     return (
         <div>
-            <form method='post'>
+            <form action="/users/login" method='post'>
                 <div className="input-container">
                     <label>Username </label>
                     <input type="text" name="uname" required />

@@ -15,7 +15,7 @@ function Signup(this: any) {
 
     return (
         <div>
-            <form action='/createUser' method='post'>
+            <form action='/users/createUser' method='post'>
                 <div className="input-container">
                     <label>First Name </label>
                     <input type="text" name="fname" required />
