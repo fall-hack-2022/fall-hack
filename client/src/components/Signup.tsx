@@ -14,34 +14,42 @@ function Signup(this: any) {
     }
 
     return (
-        <div className="text-center">
-            <form action='/users/createUser' method='post'>
+        <div>
+            <br/>
+            <h1 className="mb-8 text-3xl text-center">Register for LastSpot</h1>
+            <form action='/users/createUser' method='post' className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="input-container">
-                    <label>First Name </label>
-                    <input type="text" name="fname" required />
+                    <input placeholder="First Name" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           type="text" name="fname" required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Last Name </label>
-                    <input type="text" name="lname" required />
+                    <input placeholder="Last Name" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" name="lname" required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Username </label>
-                    <input type="text" name="uname" required />
+                    <input placeholder="Username " className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" name="uname" required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Email </label>
-                    <input type="text" name="email" required />
+                    <input placeholder="Email" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" name="email" required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Password </label>
-                    <input type="password" name="pass1" id='pw1' onChange={setP1} required />
+                    <input placeholder="Password" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="password" name="pass1" id='pw1' onChange={setP1} required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Confirm Password </label>
-                    <input type="password" name="pass2" id='pw2' onChange={setP2} required />
+                    <input placeholder="Confirm Password" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="password" name="pass2" id='pw2' onChange={setP2} required />
                 </div>
-                <div className="button-container">
-                    {password1 === password2 ? <button type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
+                <br/>
+                <div className="w-half">
+                    {password1 === password2 ? <button   className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
                 </div>
             </form>
         </div>

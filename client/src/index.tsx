@@ -7,6 +7,7 @@ import Login from './components/Login'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Signup from "./components/Signup";
 import Header from './components/Header';
+import NewLot from "./components/NewLot";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,12 +18,13 @@ root.render(
     <BrowserRouter>
     <Header />
     <div className='flex-col'>
-      <div className='m-auto bg-slate-300 flex-grow'>
+      <div className='m-auto flex-grow'>
     <Routes>
-      <Route path='/lots' element={<Lots />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup/>}  />
-      <Route path='/*' element={<Homepage />} />
+        <Route path='/newlot' element={<NewLot />} />
+        <Route path='/lots' element={<Lots />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup/>}  />
+        <Route path='/*' element={<Homepage />} />
     </Routes>
     </div>
     </div>

@@ -3,17 +3,19 @@ function Login() {
 
     return (
         <div className="text-center">
+            <br/>
+            <h1 className="mb-8 text-3xl text-center">Login to LastSpot</h1>
             <form action="/users/login" method='post'>
                 <div className="input-container">
-                    <label>Username </label>
-                    <input type="text" name="uname" required />
+                    <input placeholder="Username" type="text" name="uname" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
                 </div>
+                <br/>
                 <div className="input-container">
-                    <label>Password </label>
-                    <input type="password" name="pass" required />
+                    <input placeholder="Password" type="password" name="pass" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
                 </div>
-                <div className="button-container">
-                    <button type="submit">Submit</button>
+                <br/>
+                <div className="w-half">
+                    <button  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit">Submit</button>
                 </div>
             </form>
         </div>
