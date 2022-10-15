@@ -14,7 +14,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '/public')))
 app.use('/users', userRouter)
 app.use('/lots', lotRouter)
+app.use(session({
 
+    name: "session",
+    secret: 'muffin',
+    resave: false,
+    cookie: { maxAge: 30 * 60 * 1000 }, //60000= 1 min
+    saveUninitialized: false //false prevent new cookie every http requesr
+
+}));
 
 app.get('/hello', (req, res) => {
     res.send("HELLO!");
@@ -36,12 +44,11 @@ app.listen(PORT, () => {
         pass TEXT NOT NULL, 
         email TEXT NOT NULL, 
         fname TEXT NOT NULL, 
-        lname TEXT NOT NULL,
-        admin BOOLEAN NOT NULL DEFAULT false, 
-        verified BOOLEAN NOT NULL DEFAULT false);`
+        lname TEXT NOT NULL);`
 
     const createQuery2 = `CREATE TABLE IF NOT EXISTS ${process.env.PG_LOT_TABLE} (
         id SERIAL,
+        owner BIGINT NOT NULL,
         lot_name TEXT NOT NULL, 
         price INT NOT NULL, 
         address TEXT NOT NULL, 
