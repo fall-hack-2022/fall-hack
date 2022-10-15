@@ -1,10 +1,13 @@
-
+import { useParams } from 'react-router-dom'
 function Login() {
+
+    let { query } = useParams()
 
     return (
         <div className="text-center">
             <br/>
             <h1 className="mb-8 text-3xl text-center">Login to LastSpot</h1>
+            { query === "incorrect" ? <p className='text-red-500'>That password was incorrent</p> : <></>}
             <form action="/users/login" method='post'>
                 <div className="input-container">
                     <input placeholder="Username" type="text" name="uname" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />

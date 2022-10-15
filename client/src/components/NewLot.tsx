@@ -7,12 +7,12 @@ function NewLot() {
             <form action='/users/createLot' method='post'>
                 <div className="input-container">
                     <input placeholder="Lot Name" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" name="lot_name" required />
+                        type="text" name="lotName" required />
                 </div>
                 <br/>
                 <div className="input-container">
                     <input placeholder="Price" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" name="price" required />
+                        type="number" name="price" required />
                 </div>
                 <br/>
                 <div className="input-container">
@@ -22,7 +22,7 @@ function NewLot() {
                 <br/>
                 <div className="input-container">
                     <input placeholder="Total Spots" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" name="spots_total" required />
+                        type="number" name="spots" required />
                 </div>
                 <br/>
                 <div className="w-half">

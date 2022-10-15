@@ -35,7 +35,7 @@ function Signup(this: any) {
                 <br/>
                 <div className="input-container">
                     <input placeholder="Email" className="shadow appearance-none border rounded w-half py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="text" name="email" required />
+                        type="email" name="email" required />
                 </div>
                 <br/>
                 <div className="input-container">

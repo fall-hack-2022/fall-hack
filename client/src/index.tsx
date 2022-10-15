@@ -22,7 +22,8 @@ root.render(
     <Routes>
         <Route path='/newlot' element={<NewLot />} />
         <Route path='/lots' element={<Lots />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login/:query' element={<Login />}/>
+        <Route path='/login/' element={<Login />} />
         <Route path='/signup' element={<Signup/>}  />
         <Route path='/*' element={<Homepage />} />
     </Routes>

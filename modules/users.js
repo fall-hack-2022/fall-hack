@@ -36,9 +36,10 @@ router.post('/createUser', async (req,res)=> {
             console.log(results2)
             req.session.user = results2.results[0];
             client.release()
+            res.redirect('/newlot')
+        } else {
+        res.json({message: "Passwords do not match. Live in fear"})
         }
-        
-        res.json({message:"YOU HAVE SUCCEFULLY REGISTERED. YOUR LIFE IS NOW IN MY HANDS"})
     } catch(err) {
         console.error(err)
         res.json({message: "An Unknown Error has occured. Live in fear"})
@@ -64,9 +65,9 @@ router.post('/login', async (req, res) => {
         }
         if (passwordToCheck == passwordSplit[1]) {
             req.session.user = results.row[0];
-            res.json({message:"YOU HAVE SUCCEFULLY SIGNED IN. YOU LIFE WILL BE SPARED THIS TIME"})
+            res.redirect('/newlot')
         } else {
-            res.json({message: "YOU HAVE FAILED LOGIN. YOU WILL NOW BE EXECUTED"})
+            res.redirect('/login/incorrect')
         }
     } catch(err) {
         console.error(err)
@@ -74,6 +75,13 @@ router.post('/login', async (req, res) => {
     }
 
 })
+
+router.get('/getUser', (req,res) => {
+    var getUser = req.session.user || null
+    getUser.delete(pass)
+    res.json(getUser)
+})
+
 
 // router.get('/viewUsers', (req,res) => {
 //     pool.query('SELECT * FROM lot_users', (error, result) => {
