@@ -14,7 +14,7 @@ function Signup(this: any) {
     }
 
     return (
-        <div>
+        <div className="text-center">
             <form action='/users/createUser' method='post'>
                 <div className="input-container">
                     <label>First Name </label>
@@ -41,7 +41,7 @@ function Signup(this: any) {
                     <input type="password" name="pass2" id='pw2' onChange={setP2} required />
                 </div>
                 <div className="button-container">
-                    {password1 == password2 ? <button type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
+                    {password1 === password2 ? <button type="submit">Submit</button> : <div>Entered Passwords do not match</div>}
                 </div>
             </form>
         </div>

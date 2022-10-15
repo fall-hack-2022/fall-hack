@@ -1,7 +1,7 @@
 
 function Lots() {
   return (
-    <div>
+    <div className="text-center">
         <div>ASJDFK:SDAJGK:LADWSJGLK:</div>
     </div>
   )

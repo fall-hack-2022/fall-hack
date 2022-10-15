@@ -2,7 +2,7 @@
 function Login() {
 
     return (
-        <div>
+        <div className="text-center">
             <form action="/users/login" method='post'>
                 <div className="input-container">
                     <label>Username </label>
