@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Lot from './components/Lot';
+import Login from './components/Login'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Signup from "./components/Signup";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +17,8 @@ root.render(
     <BrowserRouter>
     <Routes>
       <Route path='/lot' element={<Lot />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/signup' element={<Signup/>}  />
       <Route path='/*' element={<App />} />
     </Routes>
     </BrowserRouter>
