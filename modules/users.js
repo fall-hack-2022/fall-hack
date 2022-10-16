@@ -86,7 +86,7 @@ router.get('/getUser', (req,res) => {
 })
 
 router.post('/logout', (req,res) => {
-    req.user.session = null
+    req.session.user = null
     res.redirect('/')
 })
 

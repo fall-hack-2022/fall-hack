@@ -19,7 +19,8 @@ function Header() {
         </>}
         <Link to="/lots" className='mx-2 text-black bg-red-200 px-4 py-2 rounded hover:underline hover:bg-red-700'>Lots</Link>
           
-        {user ? <> <Link to="/newlot" className='mx-2 text-black bg-red-200 px-4 py-2 rounded hover:underline hover:bg-red-700'>New Lot</Link><form className='inline' method="post" action="/logout">
+        {user ? <> <Link to="/newlot" className='mx-2 text-black bg-red-200 px-4 py-2 rounded hover:underline hover:bg-red-700'>New Lot</Link>
+        <form className='inline' method="post" action="/users/logout">
         <input type="Submit" value='Sign Out' className='mx-2 text-black bg-red-200 px-4 py-2 rounded hover:underline hover:bg-red-700'/></form> </> : <></> }
         </div>
     </div>
