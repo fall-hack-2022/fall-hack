@@ -23,21 +23,21 @@ router.post('/createUser', async (req,res)=> {
         const fname = req.body.fname
         const lname = req.body.lname
         if(password == password2) {
-            const client = await pool.connect();
             
             var salt = crypto.randomBytes(16).toString('hex');
             var hash = crypto.createHash('sha256').update(`${password}${salt}`).digest('hex');
             var passwordToStore = `${salt}:${hash}`
             var userPasswordQuery = `SELECT * FROM ${process.env.PG_USER_TABLE} WHERE user_name='${username}';`;
             var insertQuery = `INSERT INTO ${process.env.PG_USER_TABLE} (user_name, pass, email, fname, lname) VALUES ('${username}','${passwordToStore}','${email}', '${fname}','${lname}');`;
-            const insert = await client.query(insertQuery);
-            const result2 = await client.query(userPasswordQuery);
-            var results2 = { 'results': (result2) ? result2.rows : null };
-            // console.log(req.session)
-            // console.log(results2)
-            req.session.user = results2.results[0];
-            client.release()
-            res.redirect('/newlot')
+            const insert = pool.query(insertQuery);
+            const result2 = await pool.query(userPasswordQuery, (error, result) => {
+                if(error)
+                    console.error(error)
+                else{
+                    req.session.user = result.rows[0]
+                }
+                res.redirect('/newlot')
+            })
         } else {
         res.json({message: "Passwords do not match. Live in fear"})
         }
@@ -54,22 +54,23 @@ router.post('/login', async (req, res) => {
     
 
     try {
-        const client = await pool.connect();
-        const result = await client.query(userPasswordQuery);
-        const results = { 'row': (result) ? result.rows : null };
-        var passwordSplit = results.row[0].pass.split(':')
-        var salt = passwordSplit[0]
-        var passwordToCheck = crypto.createHash('sha256').update(`${password}${salt}`).digest('hex')
-        client.release();
-        if (passwordToCheck == passwordSplit[1]) {
-            console.log(`${results.row[0].fname} ${results.row[0].lname} has signed in`)
+        const result = pool.query(userPasswordQuery, (error, result) => {
+            if(error){console.error(error)}
+            else{
+            var passwordSplit = result.rows[0].pass.split(':')
+            var salt = passwordSplit[0]
+            var passwordToCheck = crypto.createHash('sha256').update(`${password}${salt}`).digest('hex')
+            if (passwordToCheck == passwordSplit[1]) {
+                console.log(`${result.rows[0].fname} ${result.rows[0].lname} has signed in`)
+            }
+            if (passwordToCheck == passwordSplit[1]) {
+                req.session.user = result.rows[0];
+                res.redirect('/newlot')
+            } else {
+                res.redirect('/login/incorrect')
+            }
         }
-        if (passwordToCheck == passwordSplit[1]) {
-            req.session.user = results.row[0];
-            res.redirect('/newlot')
-        } else {
-            res.redirect('/login/incorrect')
-        }
+        })
     } catch(err) {
         console.error(err)
         res.json({message: "An Unknown Error has occured. Live in fear"})
@@ -79,10 +80,15 @@ router.post('/login', async (req, res) => {
 
 router.get('/getUser', (req,res) => {
     var getUser = req.session.user || null
-    getUser.delete(pass)
+    if( req.session.user)
+        delete(getUser.pass)
     res.json(getUser)
 })
 
+router.post('/logout', (req,res) => {
+    req.user.session = null
+    res.redirect('/')
+})
 
 // router.get('/viewUsers', (req,res) => {
 //     pool.query('SELECT * FROM lot_users', (error, result) => {
