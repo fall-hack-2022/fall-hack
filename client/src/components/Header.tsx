@@ -11,6 +11,9 @@ function Header() {
   return (
     <div className='flex px-2 p-3 h-fit bg-red-300'>
         <div className=' mx-auto font-bold'>
+            <div className="text-center font-bold text-xl ">Last Spot<br/><br/>
+            </div>
+
         <Link to="/" className='mx-2 text-black bg-red-200 px-4 py-2 rounded hover:underline hover:bg-red-700'>Home</Link>
         {user ? <></> :
         <>
