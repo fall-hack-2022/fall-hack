@@ -24,10 +24,8 @@ router.post("/createLot", async (req, res) => {
     const spots = req.body.spots;
     const price = req.body.price;
     try {
-      const client = await pool.connect();
       var insertQuery = `INSERT INTO ${process.env.PG_LOT_TABLE} (owner, lot_name, price, address, spots_total) values (${req.session.user.id}, '${lotName}', ${price}, '${address}', ${spots})`;
-      const result = await client.query(insertQuery);
-      client.release();
+      const result = await pool.query(insertQuery);
       res.redirect('/lots');
     } catch (err) {
       console.error(err);
@@ -38,14 +36,17 @@ router.post("/createLot", async (req, res) => {
   }
 });
 
-router.get("/getAllForUser", async (req, res) => {
+router.get("/getAllForUser", (req, res) => {
   if (req.session.user) {
     try {
-      const client = await pool.connect();
       const getLotsQuery = `SELECT * FROM ${process.env.PG_LOT_TABLE} WHERE owner = ${req.session.user.id}`;
-      const result = await client.query(getLotsQuery);
-      const results = { results: result ? result.rows : null };
-      res.json(results.results);
+      pool.query(getLotsQuery, (error, result) => {
+        if(error){console.error(error);}
+        else{
+            const results = { results: result ? result.rows : null };
+            res.json(results.results);
+        }
+      });
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -55,47 +56,56 @@ router.get("/getAllForUser", async (req, res) => {
   }
 });
 
-router.get("/getAll", async (req, res) => {
+router.get("/getAll", (req, res) => {
   try {
-    const client = await pool.connect();
     const getLotsQuery = `SELECT * FROM ${process.env.PG_LOT_TABLE}`;
-    const result = await client.query(getLotsQuery);
-    const results = { results: result ? result.rows : null };
-    res.json(results.results);
+    pool.query(getLotsQuery, (error, result) => {
+        if(error){console.error(error);}
+        else{
+            const results = { results: result ? result.rows : null };
+            res.json(results.results);
+        }
+      });
   } catch (err) {
     console.error(err);
     res.json({ message: "You failed" });
   }
 });
 
-router.get("/getSpecificLot/:ID", async (req, res) => {
+router.get("/getSpecificLot/:ID", (req, res) => {
   const id = req.params.ID;
   try {
-    const client = await pool.connect();
     const getLotQuery = `SELECT * FROM ${process.env.PG_LOT_TABLE} WHERE id = ${id}`;
-    const result = await client.query(getLotQuery);
+    pool.query(getLotQuery, (error, result) => {
+        if(error){
+            console.error(error);
+        }
+        else{
     const results = { result: result ? result.rows[0] : null };
     res.json(results.result);
+        }
+    });
   } catch (err) {
     console.error(err);
     res.json({ message: "You failed" });
   }
 });
 
-router.post("/addSpot/:ID", async (req, res) => {
+router.post("/addSpot/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
       const getLotQuery = `SELECT spots_filled FROM ${process.env.PG_LOT_TABLE} WHERE id = ${id}`;
-      const result = await client.query(getLotQuery);
-      const results = { result: result ? result.rows[0] : null };
-      const spotsfilled = results.result.spots_filled;
-      const insertQuery = `UPDATE ${
-        process.env.PG_LOT_TABLE
-      } SET spots_filled = ${spotsfilled + 1} WHERE id = ${id}`;
-      const result2 = await client.query(insertQuery);
-      res.json(result2);
+      pool.query(getLotQuery, (error, result) => {
+        const results = { result: result ? result.rows[0] : null };
+        const spotsfilled = results.result.spots_filled;
+        const insertQuery = `UPDATE ${
+          process.env.PG_LOT_TABLE
+        } SET spots_filled = ${spotsfilled + 1} WHERE id = ${id}`;
+        pool.query(insertQuery);
+        res.redirect('/lots');
+      });
+      
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -109,16 +119,17 @@ router.post("/removeSpot/:ID", async (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
-      const getLotQuery = `SELECT spots_filled FROM ${process.env.PG_LOT_TABLE} WHERE id = ${id}`;
-      const result = await client.query(getLotQuery);
-      const results = { result: result ? result.rows[0] : null };
-      const spotsfilled = results.result.spots_filled;
-      const insertQuery = `UPDATE ${
-        process.env.PG_LOT_TABLE
-      } SET spots_filled = ${spotsfilled - 1} WHERE id = ${id}`;
-      const result2 = await client.query(insertQuery);
-      res.json(result2);
+        const getLotQuery = `SELECT spots_filled FROM ${process.env.PG_LOT_TABLE} WHERE id = ${id}`;
+        pool.query(getLotQuery, (error, result) => {
+          const results = { result: result ? result.rows[0] : null };
+          const spotsfilled = results.result.spots_filled;
+          const insertQuery = `UPDATE ${
+            process.env.PG_LOT_TABLE
+          } SET spots_filled = ${spotsfilled - 1} WHERE id = ${id}`;
+          pool.query(insertQuery);
+          res.redirect('/lots');
+        });
+        
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -128,14 +139,17 @@ router.post("/removeSpot/:ID", async (req, res) => {
   }
 });
 
-router.post("/closeLot/:ID", async (req, res) => {
+router.post("/closeLot/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
       const insertQuery = `UPDATE ${process.env.PG_LOT_TABLE} SET closed = true WHERE id = ${id}`;
-      const result = await client.query(insertQuery);
-      res.json(result);
+      pool.query(insertQuery, (error, result) => {
+        if(error){console.error(error)}
+        else{
+            res.redirect('/lots')
+        }
+      });
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -145,14 +159,17 @@ router.post("/closeLot/:ID", async (req, res) => {
   }
 });
 
-router.post("/maintainLot/:ID", async (req, res) => {
+router.post("/maintainLot/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
       const insertQuery = `UPDATE ${process.env.PG_LOT_TABLE} SET maintenance = true WHERE id = ${id}`;
-      const result = await client.query(insertQuery);
-      res.json(result);
+      pool.query(insertQuery, (error, result) => {
+        if(error){console.error(error)}
+        else{
+            res.redirect('/lots')
+        }
+      });
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -162,14 +179,17 @@ router.post("/maintainLot/:ID", async (req, res) => {
   }
 });
 
-router.post("/openLot/:ID", async (req, res) => {
+router.post("/openLot/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
       const insertQuery = `UPDATE ${process.env.PG_LOT_TABLE} SET closed = false WHERE id = ${id}`;
-      const result = await client.query(insertQuery);
-      res.json(result);
+      pool.query(insertQuery, (error, result) => {
+        if(error){console.error(error)}
+        else{
+            res.redirect('/lots')
+        }
+      });
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });
@@ -179,14 +199,17 @@ router.post("/openLot/:ID", async (req, res) => {
   }
 });
 
-router.post("/finishMaintenance/:ID", async (req, res) => {
+router.post("/finishMaintenance/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
-      const client = await pool.connect();
       const insertQuery = `UPDATE ${process.env.PG_LOT_TABLE} SET maintenance = false WHERE id = ${id}`;
-      const result = await client.query(insertQuery);
-      res.json(result);
+      pool.query(insertQuery, (error, result) => {
+        if(error){console.error(error)}
+        else{
+            res.redirect('/lots')
+        }
+      });
     } catch (err) {
       console.error(err);
       res.json({ message: "You failed" });

@@ -7,7 +7,7 @@ function Header() {
     fetch("/users/getUser")
       .then((data) => data.json())
       .then((data) => setUser(data));
-  });
+  }, []);
   return (
     <div className='flex px-2 p-3 h-fit bg-red-300'>
         <div className=' mx-auto font-bold'>

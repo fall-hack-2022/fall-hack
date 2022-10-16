@@ -14,7 +14,7 @@ router.use((req, res, next) => {
     next()
 })
 
-router.post('/createUser', async (req,res)=> {
+router.post('/createUser', (req,res)=> {
     try{
         const username = req.body.username
         const email = req.body.email
@@ -29,8 +29,8 @@ router.post('/createUser', async (req,res)=> {
             var passwordToStore = `${salt}:${hash}`
             var userPasswordQuery = `SELECT * FROM ${process.env.PG_USER_TABLE} WHERE user_name='${username}';`;
             var insertQuery = `INSERT INTO ${process.env.PG_USER_TABLE} (user_name, pass, email, fname, lname) VALUES ('${username}','${passwordToStore}','${email}', '${fname}','${lname}');`;
-            const insert = pool.query(insertQuery);
-            const result2 = await pool.query(userPasswordQuery, (error, result) => {
+            pool.query(insertQuery);
+            pool.query(userPasswordQuery, (error, result) => {
                 if(error)
                     console.error(error)
                 else{
@@ -47,14 +47,14 @@ router.post('/createUser', async (req,res)=> {
     }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const userPasswordQuery = `SELECT * FROM ${process.env.PG_USER_TABLE} WHERE LOWER(user_name)=LOWER('${username}')`;
     
 
     try {
-        const result = pool.query(userPasswordQuery, (error, result) => {
+        pool.query(userPasswordQuery, (error, result) => {
             if(error){console.error(error)}
             else{
             var passwordSplit = result.rows[0].pass.split(':')
