@@ -15,7 +15,7 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Enter parking location</h2>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Sign up for a Last Spot account</h2>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Backend recieves request and looks for open parking spots</h2>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Check available parking spots near you</h2>
         </div>
       </div>
     </div>
