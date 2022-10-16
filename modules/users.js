@@ -73,6 +73,7 @@ router.post('/login', (req, res) => {
         })
     } catch(err) {
         console.error(err)
+        res.redirect('/login/randomError')
         res.json({message: "An Unknown Error has occured. Live in fear"})
     }
 
