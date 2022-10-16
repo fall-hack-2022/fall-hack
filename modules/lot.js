@@ -13,9 +13,6 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", (req, res) => {
-  res.send("lots");
-});
 
 router.post("/createLot", async (req, res) => {
   if (req.session.user) {

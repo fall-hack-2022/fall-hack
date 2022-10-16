@@ -25,8 +25,8 @@ app.use('/users', userRouter)
 app.use('/lots', lotRouter)
 
 
-app.get('/hello', (req, res) => {
-    res.send("HELLO!");
+app.get('/csss', (req, res) => {
+    res.send("Hello SFU CSSS");
 })
 
 
