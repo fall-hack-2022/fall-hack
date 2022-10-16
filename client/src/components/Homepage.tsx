@@ -15,8 +15,7 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Shooting Stars</h2>
-          <p className="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Navigate to our website</h2>
         </div>
       </div>
     </div>
@@ -32,8 +31,7 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">The Catalyzer</h2>
-          <p className="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Enter location where you need parking</h2>
         </div>
       </div>
     </div>
@@ -50,12 +48,11 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">The 400 Blows</h2>
-          <p className="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Backend recieves request and looks for open parking spots</h2>
         </div>
       </div>
     </div>
-    <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+      <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
       <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
         <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
       </div>
@@ -68,13 +65,13 @@ function Homepage() {
           </svg>
         </div>
         <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Neptune</h2>
-          <p className="leading-relaxed">VHS cornhole pop-up, try-hard 8-bit iceland helvetica. Kinfolk bespoke try-hard cliche palo santo offal.</p>
+          <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">Go Park :)</h2>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
     </div>
