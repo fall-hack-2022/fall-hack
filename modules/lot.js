@@ -196,7 +196,7 @@ router.post("/openLot/:ID", (req, res) => {
   }
 });
 
-router.post("/finishMaintenance/:ID", (req, res) => {
+router.post("/endMaintenance/:ID", (req, res) => {
   if (req.session.user) {
     const id = req.params.ID;
     try {
