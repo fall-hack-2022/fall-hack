@@ -6,7 +6,10 @@
 - Theo Siemens-Rhodes - W1nst0n03 - W1nst0n#8248
 - Jasper Grant - JasperGrant - JasperGrant32#6689
 
-# To use this:
+# To use this on the cloud:
+https://fall-hack-2022.herokuapp.com/
+
+# To use this locally:
 - You will need PostgreSQL and Node
 - Create a .env in the base directory containing:
   - Postgres Password(PG_PASSWORD), Port (PG_PORT), Username (PG_USER), Database (PG_DATABASE), A name of you choice for PG_USER_TABLE, a name of your choice for PG_LOT_TABLE, a port of your choice, localhost (PG_HOST), a port to run on (PORT) <- we used 5000 as a default
