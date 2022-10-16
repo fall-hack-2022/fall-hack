@@ -14,14 +14,21 @@ function Lots() {
   maintenance: boolean;
   closed: boolean;
   }
+  type User = {
+    id: number;
+  }
+
+  var initUser: User = {id:-1}
+
   const [lots, setLots] = useState([])
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(initUser);
 
   useEffect(() => {
     fetch("/users/getUser")
       .then((data) => data.json())
       .then((data) => setUser(data));
   }, []);
+
   useEffect(() => {
     fetch('/lots/getAll')
     .then(data => data.json())
@@ -44,7 +51,7 @@ function Lots() {
                       <br />
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Status:  {lot.closed? <span className="text-red-500 mx-1"> Closed</span> : 
                     lot.maintenance? <span className="text-black mx-1"> Under Maintenance</span> : <span className="text-green-500 mx-1"> Open</span>}</a>
-                  {user ? <div> <div className="flex my-1">
+                  {user ? lot.owner == user.id ? <div> <div className="flex my-1">
                   <form action={`/lots/addSpot/${lot.id}`} method='post'><input type='submit' className="bg-blue-400 py-2 cursor-pointer px-4 hover:bg-blue-700 text-black hover:text-white rounded" value="Add a Parked Car" /></form>
                   <form action={`/lots/removeSpot/${lot.id}`} method='post'><input type='submit' className="bg-red-400 py-2 mx-1 px-4 cursor-pointer hover:bg-red-700 text-black hover:text-white rounded" value="Remove a Parked Car" /></form>
                   </div>
@@ -56,7 +63,7 @@ function Lots() {
                    : <form action={`/lots/maintainLot/${lot.id}`} method='post'><input type='submit' className="bg-red-400 py-2 mx-1 cursor-pointer px-4 hover:bg-red-700 text-black hover:text-white rounded" value="Maintain Lot" /></form>}
                  
                  
-                  </div></div>: <></>}
+                  </div></div>: <></> : <></>}
                   </div>
               </div>
           </div>
