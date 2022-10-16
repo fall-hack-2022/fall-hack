@@ -49,8 +49,8 @@ function Lots() {
                   <div className="text-start">
                     <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Spots:  {lot.spots_filled/lot.spots_total < 1 ? <span className="text-green-500 mx-1">{lot.spots_filled}/{lot.spots_total}</span> : <span className="text-red-500 mx-1">Full</span>}</a>
                       <br />
-                    <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Status:  {lot.closed? <span className="text-red-500 mx-1"> Closed</span> : 
-                    lot.maintenance? <span className="text-black mx-1"> Under Maintenance</span> : <span className="text-green-500 mx-1"> Open</span>}</a>
+                    <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Status:  {lot.maintenance? <span className="text-black mx-1"> Under Maintenance</span> : lot.closed? <span className="text-red-500 mx-1"> Closed</span>
+                     : <span className="text-green-500 mx-1"> Open</span>}</a>
                   {user ? lot.owner == user.id ? <div> <div className="flex my-1">
                   <form action={`/lots/addSpot/${lot.id}`} method='post'><input type='submit' className="bg-blue-400 py-2 cursor-pointer px-4 hover:bg-blue-700 text-black hover:text-white rounded" value="Add a Parked Car" /></form>
                   <form action={`/lots/removeSpot/${lot.id}`} method='post'><input type='submit' className="bg-red-400 py-2 mx-1 px-4 cursor-pointer hover:bg-red-700 text-black hover:text-white rounded" value="Remove a Parked Car" /></form>
