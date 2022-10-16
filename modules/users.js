@@ -91,14 +91,14 @@ router.post('/logout', (req,res) => {
     res.redirect('/')
 })
 
-// router.get('/viewUsers', (req,res) => {
-//     pool.query('SELECT * FROM lot_users', (error, result) => {
-//         if (error) {console.error(error);res.json({message:"die."})}
-//         else{
-//             res.json({listOfUsers: result.rows})
-//         }
-//     })
-// })
+router.get('/viewUsers', (req,res) => {
+    pool.query('SELECT * FROM lot_users', (error, result) => {
+        if (error) {console.error(error);res.json({message:"die."})}
+        else{
+            res.json({listOfUsers: result.rows})
+        }
+    })
+})
 
 // router.delete('/dropUserTableConfirmMakeSure', async (req,res) => {
 //     var client = await pool.connect()
